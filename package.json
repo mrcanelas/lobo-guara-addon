@@ -1,0 +1,13 @@
+{
+	"name": "lobo-guara-addon",
+	"version": "0.0.1",
+	"description": "MP4 direct link based addon of dubbed series in brazilian portuguese",
+	"scripts": {
+		"start": "node server.js"
+	},
+	"dependencies": {
+		"axios": "^0.21.1",
+		"stremio-addon-sdk": "1.1.x",
+		"url-exist": "^2.0.2"
+	}
+}

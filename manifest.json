@@ -1,0 +1,11 @@
+{
+    "id": "lobo-guara-addon",
+    "name": "Lobo-guara Series (BR addon)",
+    "logo": "https://aventurasnahistoria.uol.com.br/media/_versions/hard_news/meme_nota_widexl.jpg",
+    "version": "0.1.0",
+    "description": "MP4 direct link based addon of dubbed series in brazilian portuguese",
+    "resources": ["stream"],
+    "types": ["series"],
+    "catalogs": [],
+    "idPrefixes": ["tt"]
+}
