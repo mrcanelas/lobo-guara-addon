@@ -13,7 +13,7 @@ builder.defineStreamHandler(async (args) => {
     let streams = [
       {
         id: args.id,
-        title: name,
+        title: name + ' - DUBLADO',
         type: `series`,
         url: url,
         behaviorHints: {
@@ -26,7 +26,7 @@ builder.defineStreamHandler(async (args) => {
     let streams = [
       {
         id: args.id,
-        title: name,
+        title: name + ' - DUBLADO',
         type: `series`,
         url: url2,
         behaviorHints: {
