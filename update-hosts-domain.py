@@ -7,7 +7,7 @@ HOST2_REQUEST = os.environ.get("HOST2_REQUEST")
 def request_url(data):
     response = requests.post(META_ENDPOINT,data=data, headers={"Content-Type":"application/x-www-form-urlencoded","Connection":"keep-alive","Accept-Encoding":"gzip","Host":"teste.cinevision.site","Accept-Charset":"utf-8"})
     return response.json()["LIVETV"][0]['episode_url'].strip()
-def extract_template_from(uri: str):
+def extract_template_from(uri):
     if "71712" in uri:
         uri = uri.replace("71712","${id}")
     elif "82856" in uri:
