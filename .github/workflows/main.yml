@@ -1,0 +1,55 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Update host domains
+
+# Controls when the action will run. 
+on:
+  # Triggers the workflow on push or pull request events but only for the main branch
+  schedule:
+    - cron: "0 6 * * *"
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  update_domain:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+          
+      - name: Install SSH key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.SSH_KEY }}
+          known_hosts: ${{ secrets.KNOWN_HOSTS }}
+
+      # Fetch new hosts' domain
+      - name: Change domains
+        env:
+          META_ENDPOINT: ${{ secrets.ENDPOINT }}
+          HOST_REQUEST: ${{ secrets.HOSTDATA }}
+          HOST2_REQUEST: ${{secrets.HOST2DATA }}
+          GITHUBUSERNAME: ${{ secrets.GITHUBUSERNAME }}
+        run: |
+          chmod +x ./update-hosts-domains.sh
+          ./update-hosts-domains.sh
+          
+      # Commit changes
+      - name: Commit detected changes
+        uses: EndBug/add-and-commit@v7
+        with:
+          add: '["hosts.js","beamup.json"]'
+          author_name: "Victor Guerra Veloso"
+          author_email: "victorgvbh@gmail.com"
+          branch: main
+          message: "Github actions updated domains"
+          push: "origin main --force"
