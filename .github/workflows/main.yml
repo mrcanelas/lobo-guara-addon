@@ -21,6 +21,16 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+          
+      - name: Install SSH key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.SSH_KEY }}
+          known_hosts: ${{ secrets.KNOWN_HOSTS }}
 
       # Fetch new hosts' domain
       - name: Change domains
@@ -28,6 +38,7 @@ jobs:
           META_ENDPOINT: ${{ secrets.ENDPOINT }}
           HOST_REQUEST: ${{ secrets.HOSTDATA }}
           HOST2_REQUEST: ${{secrets.HOST2DATA }}
+          GITHUBUSERNAME: ${{ secrets.GITHUBUSERNAME }}
         run: |
           chmod +x ./update-hosts-domains.sh
           ./update-hosts-domains.sh
