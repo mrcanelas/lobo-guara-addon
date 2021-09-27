@@ -1,4 +1,4 @@
-name: Update Mapping
+name: Update Hosts
 on:
   workflow_dispatch:
   schedule:
@@ -14,3 +14,9 @@ jobs:
         run: npm install
       - name: Run Update Hosts
         run: node update-hosts.js
+        env:
+          CI: true
+          PERSONALACCESSTOKEN: ${{ secrets.PERSONALACCESSTOKEN }}
+          ENDPOINT: ${{ secrets.ENDPOINT }}
+          HOSTDATA: ${{ secrets.HOSTDATA }}
+          HOST2DATA: ${{ secrets.HOST2DATA }}
