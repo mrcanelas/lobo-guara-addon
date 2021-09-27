@@ -8,7 +8,7 @@ const { getUrls } = require("./hosts")
 builder.defineStreamHandler(async (args) => {
   let [imdbId, season, episode] = args.id.split(":");
   let { id, name } = await getMeta(imdbId);
-  const {url, url2} = getUrls(id,season,episode);
+  const [ url, url2 ] = await getUrls(id,season,episode);
   if ((await urlExist(url)) == true) {
     let streams = [
       {

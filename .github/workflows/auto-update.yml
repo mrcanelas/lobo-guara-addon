@@ -1,0 +1,16 @@
+name: Update Mapping
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 3 * * *'
+jobs:
+
+  update-mapping:
+      runs-on: ubuntu-latest
+      steps:
+      - name: Checkout
+        uses: actions/checkout@v2.3.1
+      - name: Install Dependencies
+        run: npm install
+      - name: Run Update Hosts
+        run: node update-hosts.js
